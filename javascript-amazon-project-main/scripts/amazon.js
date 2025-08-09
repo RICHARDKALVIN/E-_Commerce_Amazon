@@ -25,8 +25,9 @@ products.forEach((product,index)=>{
           </div>
 
           <div class="product-quantity-container">
-            <select>
-              <option selected value="1">1</option>
+            <select class="js-quantity-selector-${product.id}" >
+              <option selected value="0">0</option>
+              <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -41,7 +42,7 @@ products.forEach((product,index)=>{
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart  checkId-${product.id}"  >
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -60,20 +61,27 @@ document.querySelectorAll(".js-add-to-cart")
 .forEach((button)=>{
     button.addEventListener('click',()=>{
     const productId = button.dataset.productId;
-    let isExist =true;
+    let isnotExist =true;
+    document.querySelector(`.checkId-${productId}`).classList.add("addedStyle");
+    let quId='.js-quantity-selector-'+productId;
+    let selectedValue=Number(document.querySelector(quId).value);
+    setTimeout(()=>{
+      document.querySelector(`.checkId-${productId}`).classList.remove("addedStyle");
+    },3000);
     cart.forEach((item)=>{
-        if(productId === item.productId){
-            item.quantity+=1;
-            isExist=false;
+        if(productId === item.productId ){
+            item.quantity+= (selectedValue >0)? selectedValue : 1;
+            isnotExist=false;
             console.log(item);
+            selectedValue =0;
 
         }
 
     });
-    if(isExist){
+    if(isnotExist ){
         cart.push({
         productId : productId,
-        quantity : 1
+        quantity : (selectedValue >0)? selectedValue : 1
     });
     console.log(cart);
 
