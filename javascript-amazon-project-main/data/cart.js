@@ -3,15 +3,18 @@ if(!cart){
 cart =[
     {
         productId : "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity :3
+        quantity :3,
+        deliveryOptionId:'1'
     },
     {
         productId : "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-        quantity :2
+        quantity :2,
+        deliveryOptionId:'1'
     },
     {
         productId : "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
-        quantity :2
+        quantity :2,
+        deliveryOptionId:'1'
     }
 ];
 
@@ -36,7 +39,8 @@ export function addToCart(productId,selectedValue){
           if(isnotExist ){
               cart.push({
               productId : productId,
-              quantity : (selectedValue >0)? selectedValue : 1
+              quantity : (selectedValue >0)? selectedValue : 1,
+              deliveryOptionId:'1'
           });
           }
           saveToStorage();
