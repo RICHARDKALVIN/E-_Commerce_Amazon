@@ -1,4 +1,4 @@
-import {cart,removeFromCart,calculateQuantity} from '../data/cart.js';
+import {cart,removeFromCart,calculateQuantity,UpadateSpecificItem} from '../data/cart.js';
 import { products} from '../data/products.js';
 import {moneyFormat}from './utils/money.js';
 let TotalItemCout=document.querySelector('.js-item-count');
@@ -33,11 +33,13 @@ cart.forEach((cartItem)=>{
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label js-check-quantity-hider-${matchingProduct.id}">${cartItem.quantity}</span>
                   </span>
-                  <span class="update-quantity-link link-primary">
+                  <span class="update-quantity-link link-primary js-update-button-link" data-product-id="${matchingProduct.id}">
                     Update
                   </span>
+                  <input type="number" class="quantity-update-input is-editing-quantity js-up-input-${matchingProduct.id}">
+                  <span class="link-primary is-editing-quantity js-save-${matchingProduct.id} js-common-save">save</span>
                   <span class="delete-quantity-link link-primary js-delete-link"
                   data-product-id="${matchingProduct.id}">
                     Delete
@@ -105,5 +107,30 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     let AfterDeleteCartCount=calculateQuantity();
     TotalItemCout.innerHTML=(AfterDeleteCartCount == 0)? '' : `${AfterDeleteCartCount} items`;
   })
+});
+
+document.querySelectorAll(".js-update-button-link").forEach((upButton)=>{
+  upButton.addEventListener('click',()=>{
+    document.querySelector(`.js-up-input-${upButton.dataset.productId}`).classList.remove("is-editing-quantity");
+    document.querySelector(`.js-up-input-${upButton.dataset.productId}`).value=Number(document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).innerHTML);
+    document.querySelector(`.js-save-${upButton.dataset.productId}`).classList.remove("is-editing-quantity");
+    document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).classList.add("is-editing-quantity");
+    upButton.classList.add("is-editing-quantity");
+    
+      document.querySelectorAll(".js-common-save").forEach((savelink)=>{
+      savelink.addEventListener('click',()=>{
+        UpadateSpecificItem(upButton.dataset.productId, Number(document.querySelector(`.js-up-input-${upButton.dataset.productId}`).value));
+        let AfterUpadateCartCount=calculateQuantity();
+        console.log(AfterUpadateCartCount);
+        TotalItemCout.innerHTML=(AfterUpadateCartCount == 0)? '' : `${AfterUpadateCartCount} items`;
+        document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).innerHTML=document.querySelector(`.js-up-input-${upButton.dataset.productId}`).value;
+        document.querySelector(`.js-up-input-${upButton.dataset.productId}`).classList.add("is-editing-quantity");
+        document.querySelector(`.js-save-${upButton.dataset.productId}`).classList.add("is-editing-quantity");
+        document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).classList.remove("is-editing-quantity");
+        upButton.classList.remove("is-editing-quantity");
+        
+      });
+    });
+  });
 });
 

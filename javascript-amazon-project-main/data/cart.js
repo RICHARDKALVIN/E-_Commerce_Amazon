@@ -58,3 +58,19 @@ export function calculateQuantity(){
     });
     return qu;
 }
+
+export function UpadateSpecificItem(productId,newValue){
+    if(newValue<0 || 1000<newValue){
+        alert('Quantity Invalid 😐');
+        return;
+    }
+    cart.forEach((cartItem)=>{
+        if(cartItem.productId == productId){
+            cartItem.quantity=newValue;
+            console.log(cartItem);
+        }
+    });
+    
+    saveToStorage();
+
+}
