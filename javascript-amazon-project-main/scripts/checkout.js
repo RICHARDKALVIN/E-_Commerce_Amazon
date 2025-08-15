@@ -4,6 +4,7 @@ import {moneyFormat}from './utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOption} from '../data/deliveryOption.js';
 
+function renderOrderSummary(){
 let TotalItemCout=document.querySelector('.js-item-count');
 let currentItemCount=calculateQuantity();
 TotalItemCout.innerHTML=(currentItemCount == 0)? '' : `${currentItemCount} items`;
@@ -130,7 +131,7 @@ document.querySelectorAll(".js-update-button-link").forEach((upButton)=>{
       savelink.addEventListener('click',()=>{
         UpadateSpecificItem(upButton.dataset.productId, Number(document.querySelector(`.js-up-input-${upButton.dataset.productId}`).value));
         let AfterUpadateCartCount=calculateQuantity();
-        console.log(AfterUpadateCartCount);
+        
         TotalItemCout.innerHTML=(AfterUpadateCartCount == 0)? '' : `${AfterUpadateCartCount} items`;
         document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).innerHTML=document.querySelector(`.js-up-input-${upButton.dataset.productId}`).value;
         document.querySelector(`.js-up-input-${upButton.dataset.productId}`).classList.add("is-editing-quantity");
@@ -147,6 +148,12 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
   element.addEventListener('click',()=>{
     const {productId,deliveryOptionId}=element.dataset;
     updateDeliverOptions(productId,deliveryOptionId);
+    console.log(productId,deliveryOptionId);
+    renderOrderSummary();
+    
  });
 
 });
+
+}
+renderOrderSummary();

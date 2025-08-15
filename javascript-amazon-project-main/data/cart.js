@@ -84,8 +84,9 @@ export function updateDeliverOptions(productId,deliveryOptionId){
     cart.forEach((cartItem)=>{
         if(cartItem.productId == productId){
             matchingItem=cartItem;
+            matchingItem.deliveryOptionId=deliveryOptionId;
+            saveToStorage();
         }
-        matchingItem.deliveryOptionId=deliveryOptionId;
-        saveToStorage();
+        
     });
 }
