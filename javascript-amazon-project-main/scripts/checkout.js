@@ -1,4 +1,4 @@
-import {cart,removeFromCart,calculateQuantity,UpadateSpecificItem} from '../data/cart.js';
+import {cart,removeFromCart,calculateQuantity,UpadateSpecificItem, updateDeliverOptions} from '../data/cart.js';
 import { products} from '../data/products.js';
 import {moneyFormat}from './utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -22,10 +22,8 @@ cart.forEach((cartItem)=>{
     deliveryOption.forEach((option)=>{
       if(option.id ==delOptionId)delop=option;
     });
-
     const today=dayjs();
     const deliveryDate=today.add(delop.deliveryDays,'days');
-    console.log(deliveryDate);
     const dateString = deliveryDate.format('dddd, MMMM D');
 
     cartStr+=`
@@ -82,7 +80,9 @@ function DeliveryOptionHTML(matchingProduct,cartItem){
     const dateString = deliveryDate.format('dddd, MMMM D');
     const priceString =(deliveryOp.priceCents == 0)? 'FREE' : `₹${moneyFormat(deliveryOp.priceCents)} -`;
     const isChecked =deliveryOp.id === cartItem.deliveryOptionId;
-    html+=`<div class="delivery-option">
+    html+=`<div class="delivery-option js-delivery-option"
+     data-product-id="${matchingProduct.id}" 
+     data-delivery-option-id="${deliveryOp.id}">
         <input type="radio"
           ${isChecked ? 'checked':'' }
           class="delivery-option-input"
@@ -143,3 +143,10 @@ document.querySelectorAll(".js-update-button-link").forEach((upButton)=>{
   });
 });
 
+document.querySelectorAll('.js-delivery-option').forEach((element)=>{
+  element.addEventListener('click',()=>{
+    const {productId,deliveryOptionId}=element.dataset;
+    updateDeliverOptions(productId,deliveryOptionId);
+ });
+
+});
