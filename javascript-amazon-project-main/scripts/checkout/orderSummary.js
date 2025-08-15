@@ -1,8 +1,9 @@
 import {cart,removeFromCart,calculateQuantity,UpadateSpecificItem, updateDeliverOptions} from '../../data/cart.js';
-import { products} from '../../data/products.js';
+import { products,getProduct} from '../../data/products.js';
 import {moneyFormat}from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOption} from '../../data/deliveryOption.js';
+import {renderPaymentSummary} from './paymentSummary.js';
 
 export function renderOrderSummary(){
 let TotalItemCout=document.querySelector('.js-item-count');
@@ -11,13 +12,8 @@ TotalItemCout.innerHTML=(currentItemCount == 0)? '' : `${currentItemCount} items
 let cartStr='';
 cart.forEach((cartItem)=>{
     const productId =cartItem.productId;
-    let matchingProduct;
-    products.forEach((product)=>{
-        if(product.id == productId){
-            matchingProduct=product;
-
-        }
-    });
+    let matchingProduct =getProduct(productId);
+    
     const delOptionId= cartItem.deliveryOptionId;
     let delop;
     deliveryOption.forEach((option)=>{
@@ -116,6 +112,7 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     document.querySelector(removeProduct).remove();
     let AfterDeleteCartCount=calculateQuantity();
     TotalItemCout.innerHTML=(AfterDeleteCartCount == 0)? '' : `${AfterDeleteCartCount} items`;
+    renderPaymentSummary();
   })
 });
 
@@ -138,7 +135,7 @@ document.querySelectorAll(".js-update-button-link").forEach((upButton)=>{
         document.querySelector(`.js-save-${upButton.dataset.productId}`).classList.add("is-editing-quantity");
         document.querySelector(`.js-check-quantity-hider-${upButton.dataset.productId}`).classList.remove("is-editing-quantity");
         upButton.classList.remove("is-editing-quantity");
-        
+        renderPaymentSummary();
       });
     });
   });
@@ -150,7 +147,7 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
     updateDeliverOptions(productId,deliveryOptionId);
     console.log(productId,deliveryOptionId);
     renderOrderSummary();
-    
+    renderPaymentSummary();
  });
 
 });

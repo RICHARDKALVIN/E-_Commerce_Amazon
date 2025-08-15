@@ -15,3 +15,10 @@ export const deliveryOption=[{
 }
 
 ];
+export function getDeliveryOption(deliveryOptionId){
+    let delop;
+    deliveryOption.forEach((option)=>{
+      if(option.id == deliveryOptionId)delop=option;
+    });
+    return delop || deliveryOption[0];
+}
