@@ -1,4 +1,4 @@
-import {moneyFormat} from '../scripts/utils/money.js';
+import {moneyFormat} from '../../scripts/utils/money.js';
 
 describe('test suit : testing converted into rubees',()=>{
     // it('converts cents into money',()=>{
