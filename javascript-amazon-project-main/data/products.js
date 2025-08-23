@@ -680,7 +680,9 @@ export function loadProductsFetch(){
     return response.json();
   }).then((productData)=>{
     products=productData;
-  })
+  }).catch((error)=>{
+    console.log(error);
+  });
   return promise;
 }
 // loadProductsFetch();
@@ -693,6 +695,9 @@ export function loadProductsFetch(){
 //   console.log(products);
 //   fun();
 // });
+  //  xhr.addEventListener('error',()=>{
+  //   console.log('error -try angain later !.');
+  //  });
 // xhr.open('GET','https://supersimplebackend.dev/products');
 // xhr.send();
 // }
