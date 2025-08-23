@@ -1,7 +1,15 @@
 import  {cart , addToCart} from '../data/cart.js';
 import { products,loadProducts } from '../data/products.js';
 import {moneyFormat}from './utils/money.js'
-loadProducts(renderProductsGrid);
+// loadProducts(renderProductsGrid);
+
+new Promise((resolve)=>{
+  loadProducts(()=>{
+    resolve();
+  });
+}).then(()=>{
+  renderProductsGrid();
+});
 function renderProductsGrid(){
     let productString='';
 
