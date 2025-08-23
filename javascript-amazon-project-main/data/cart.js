@@ -64,7 +64,7 @@ export function calculateQuantity(){
 }
 
 export function UpadateSpecificItem(productId,newValue){
-    if(newValue<0 || 1000<newValue){
+    if(newValue<=0 || 1000<newValue){
         alert('Quantity Invalid 😐');
         return;
     }
