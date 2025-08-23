@@ -1,13 +1,16 @@
 import  {cart , addToCart} from '../data/cart.js';
-import { products,loadProducts } from '../data/products.js';
+import { products,loadProductsFetch } from '../data/products.js';
 import {moneyFormat}from './utils/money.js'
 // loadProducts(renderProductsGrid);
 
-new Promise((resolve)=>{
-  loadProducts(()=>{
-    resolve();
-  });
-}).then(()=>{
+// new Promise((resolve)=>{
+//   loadProducts(()=>{
+//     resolve();
+//   });
+// }).then(()=>{
+//   renderProductsGrid();
+// });
+loadProductsFetch ().then(()=>{
   renderProductsGrid();
 });
 function renderProductsGrid(){

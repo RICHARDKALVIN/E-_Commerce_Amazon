@@ -9,6 +9,8 @@ export function getProduct(productId){
     return matchingProduct;
 }
 
+
+
 export let products=[];
 // export const products = [
 //   {
@@ -670,16 +672,28 @@ export let products=[];
 //     ]
 //   }
 // ];
-export function loadProducts(fun){
- const xhr =new XMLHttpRequest();
-xhr.addEventListener('load',()=>{
-  let ans =xhr.response;
-  
-  products= JSON.parse(ans);
-  console.log(products);
-  fun();
-});
-xhr.open('GET','https://supersimplebackend.dev/products');
-xhr.send();
+
+
+
+export function loadProductsFetch(){
+  const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
+    return response.json();
+  }).then((productData)=>{
+    products=productData;
+  })
+  return promise;
 }
+// loadProductsFetch();
+// export function loadProducts(fun){
+//  const xhr =new XMLHttpRequest();
+// xhr.addEventListener('load',()=>{
+//   let ans =xhr.response;
+  
+//   products= JSON.parse(ans);
+//   console.log(products);
+//   fun();
+// });
+// xhr.open('GET','https://supersimplebackend.dev/products');
+// xhr.send();
+// }
 // loadProducts();
