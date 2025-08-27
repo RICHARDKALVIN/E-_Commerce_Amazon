@@ -90,3 +90,8 @@ export function updateDeliverOptions(productId,deliveryOptionId){
         
     });
 }
+export function resetCart(){
+    cart=[];
+    console.log(cart);
+    saveToStorage();
+}

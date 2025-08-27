@@ -9,4 +9,3 @@ function saveToLocalStorage(){
     localStorage.setItem('orders',JSON.stringify(orders));
 }
 
-console.log(orders);

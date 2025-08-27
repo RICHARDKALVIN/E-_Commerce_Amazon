@@ -3,12 +3,12 @@ import {orders} from '../data/orders.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { getProduct } from '../data/products.js';
 import { loadProductsFetch } from '../data/products.js';
+import { addToCart, resetCart } from '../data/cart.js';
 function generateOrders(){
     
     
     let orderString='';
     orders.forEach((odr)=>{
-        
         const inputDate = odr.orderTime;
         const formattedDate = dayjs(inputDate).format('MMMM D');
 
@@ -65,7 +65,7 @@ function generateOrders(){
               </div>
               <button class="buy-again-button button-primary">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
-                <span class="buy-again-message">Buy it again</span>
+                <span class="buy-again-message js-buy-again-button"data-product-id="${item.productId}">Buy it again</span>
               </button>
             </div>
 
@@ -84,10 +84,20 @@ function generateOrders(){
 
 
 
-
-
-
     document.querySelector('.orders-grid').innerHTML=orderString;
+    resetCart();
+    
+    document.querySelectorAll(".js-buy-again-button").forEach((product)=>{
+      product.addEventListener('click',()=>{
+      let matchingProduct=getProduct(product.dataset.productId);
+      console.log(matchingProduct);
+      addToCart(matchingProduct.id,1);
+      });
+      
+
+    });
+
+
 }
 
 loadProductsFetch().then(()=>{
