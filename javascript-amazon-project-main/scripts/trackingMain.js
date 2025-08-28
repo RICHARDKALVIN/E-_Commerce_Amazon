@@ -1,14 +1,21 @@
 import {findOrder} from '../data/orders.js';
 import { getProduct ,loadProductsFetch} from '../data/products.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import { calculateQuantity } from '../data/cart.js';
 
+
+
+
+
+function renderTrackingPage(){
 
 const url = new URL(window.location.href);
 console.log(url.searchParams.get('proId'));
 console.log(url.searchParams.get('oderId'));
+  
+let cartQuantityInOrders=calculateQuantity();
+document.querySelector(".js-cart-quantity-track").innerHTML=(cartQuantityInOrders == 0)? '' : cartQuantityInOrders;
 
-
-function renderTrackingPage(){
 let MatchingOrder=findOrder(url.searchParams.get('oderId'));
 let MathingPro=getProduct(url.searchParams.get('proId'));
 let quantity=1;
