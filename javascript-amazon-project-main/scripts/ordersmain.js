@@ -34,7 +34,7 @@ function generateOrders(){
           </div>
 
           <div class="order-details-grid">
-            ${generateInnerOrders(odr.products,formattedDate)}
+            ${generateInnerOrders(odr.products,odr.id)}
           </div>
         </div>
         `;
@@ -44,11 +44,13 @@ function generateOrders(){
 
 
 
-    function generateInnerOrders(raw,date){
+    function generateInnerOrders(raw,newPeram){
         let innerOrderString ='';
         
         raw.forEach((item)=>{
             let product=getProduct(item.productId);
+            const inputDate = item.estimatedDeliveryTime;
+        const formattedDate = dayjs(inputDate).format('MMMM D');
             innerOrderString+=` <div class="product-image-container">
               <img src="${product.image}">
             </div>
@@ -58,7 +60,7 @@ function generateOrders(){
                 ${product.name}
               </div>
               <div class="product-delivery-date">
-                Arriving on: ${date}
+                Arriving on: ${formattedDate}
               </div>
               <div class="product-quantity">
                 Quantity: ${item.quantity}
@@ -70,7 +72,7 @@ function generateOrders(){
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html">
+              <a href="tracking.html?proId=${item.productId}&oderId=${newPeram}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>

@@ -51,8 +51,8 @@
       </div>
     </div>
 
-    <div class="main">
-      <div class="order-tracking">
+    <div class="main js-tracking-main">
+      <!-- <div class="order-tracking">
         <a class="back-to-orders-link link-primary" href="orders.html">
           View all orders
         </a>
@@ -84,13 +84,10 @@
         </div>
 
         <div class="progress-bar-container">
-          <div class="progress-bar"></div>
+          <div class="progress-bar" style="width:20%"></div>
         </div>
-      </div>
+      </div> -->
     </div>
-    <script>
-      const url = new URL(window.location.href);
-      console.log(url.searchParams.get('orderId'));
-    </script>
+    <script type="module" src="scripts/trackingMain.js"></script>
   </body>
 </html>
