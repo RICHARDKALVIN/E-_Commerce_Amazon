@@ -216,3 +216,11 @@
   display:none;
   
 }
+.view-products-button{
+  margin-top: 10px;
+  padding:8px;
+  width:120px;
+}
+.cart-warning{
+  display: none;
+}

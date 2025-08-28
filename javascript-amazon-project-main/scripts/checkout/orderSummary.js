@@ -9,13 +9,17 @@ export function renderOrderSummary(){
 let TotalItemCout=document.querySelector('.js-item-count');
 let currentItemCount=calculateQuantity();
 TotalItemCout.innerHTML=(currentItemCount == 0)? '' : `${currentItemCount} items`;
-// if(currentItemCount == 0){
-//   document.querySelector(".js-warning1").classList.remove('cart-warning');
-//   document.querySelector(".js-warning2").classList.remove('cart-warning');
-// }else{
-//   document.querySelector(".js-warning1").classList.add('cart-warning');
-//   document.querySelector(".js-warning2").classList.add('cart-warning');
-// }
+
+if(currentItemCount === 0){
+  document.querySelector(".js-warning1").classList.remove('cart-warning');
+  document.querySelector(".js-warning2").classList.remove('cart-warning');
+}else{
+  document.querySelector(".js-warning1").classList.add('cart-warning');
+  document.querySelector(".js-warning2").classList.add('cart-warning');
+}
+document.querySelector('.js-warning2').addEventListener('click',()=>{
+  window.location.href='amazon.html'
+});
 let cartStr='';
 cart.forEach((cartItem)=>{
     const productId =cartItem.productId;
