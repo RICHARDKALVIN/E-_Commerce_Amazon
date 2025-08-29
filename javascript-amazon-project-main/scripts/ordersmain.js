@@ -108,6 +108,21 @@ function generateOrders(){
 
     });
 
+    document.querySelector('.js-search-button-ord').addEventListener('click',()=>{
+      let searchValue = document.querySelector('.js-search-bar-ord').value;
+      window.location.href=`amazon.html?search=${searchValue}`;
+      
+
+     });
+     document.querySelector('.js-search-bar-ord')
+      .addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          let searchValue = document.querySelector('.js-search-bar-ord').value;
+          window.location.href = `amazon.html?search=${searchValue}`;
+          
+        }
+     });
+
 
 }
 
