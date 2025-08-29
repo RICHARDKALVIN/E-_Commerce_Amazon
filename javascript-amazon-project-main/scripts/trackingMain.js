@@ -103,7 +103,21 @@ let orderHtml=`<div class="order-tracking">
       </div>`;
 
       document.querySelector('.js-tracking-main').innerHTML=orderHtml;
-    
+
+        document.querySelector('.js-search-button-track').addEventListener('click',()=>{
+          let searchValue = document.querySelector('.js-search-bar-track').value;
+          window.location.href=`amazon.html?search=${searchValue}`;
+          
+
+        });
+        document.querySelector('.js-search-bar-track')
+          .addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+              let searchValue = document.querySelector('.js-search-bar-track').value;
+              window.location.href = `amazon.html?search=${searchValue}`;
+              
+            }
+        });
 
 }
 
