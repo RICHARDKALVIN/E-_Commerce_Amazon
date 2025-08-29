@@ -1,8 +1,5 @@
 # Amazon-Style JavaScript E-Commerce Project  
 
-[![GitHub stars](https://img.shields.io/github/stars/RICHARDKALVIN/E-_Commerce_Amazon?style=social)](https://github.com/RICHARDKALVIN/E-_Commerce_Amazon/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/RICHARDKALVIN/E-_Commerce_Amazon?style=social)](https://github.com/RICHARDKALVIN/E-_Commerce_Amazon/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/RICHARDKALVIN/E-_Commerce_Amazon)](https://github.com/RICHARDKALVIN/E-_Commerce_Amazon/issues)
 
 
 > A simple, client-side JavaScript e-commerce demo modeled after a typical Amazon storefront.
